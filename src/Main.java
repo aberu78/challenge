@@ -20,12 +20,45 @@ public class Main {
         System.out.println("Longest word :" + firstFactorial(num));
         System.out.println("Enter String (First Reverse challenge)");
         String str = scanner.nextLine();
-        System.out.println("Longest word :" + firstReverse(str));  */
+        System.out.println("Longest word :" + firstReverse(str));
 
         System.out.println("Enter String (Letter change challenge)");
         String str = scanner.nextLine();
         System.out.println("Letter before " + str + " letter changed word :" + letterChanges(str));
+
+        System.out.println("Enter number (Simple Adding challenge)");
+        int num  = scanner.nextInt();
+        String bL = scanner.nextLine();
+        System.out.println("Simple Adding  :" + simpleAdding(num)); */
+
+        System.out.println("Enter String (Letter capitalization challenge)");
+        String str = scanner.nextLine();
+        System.out.println("Letter capitalization :" + letterCapitalize(str));
+
     }
+
+    public static String letterCapitalize(String str){
+        String word = "";
+        String [] var = str.split(" ");
+        for(int i = 0; i < var.length; i++){
+            String str1 = var[i].substring(0,1).toUpperCase() + var[i].substring(1);
+            word += str1 + " ";
+        }
+
+
+        return word;
+    }
+
+    public static int simpleAdding(int num){
+       if(num  == 1) {
+           return 1;
+       }
+       else{
+           int sum = num + simpleAdding(num-1);
+           return sum;
+       }
+    }
+
 
     public static String letterChanges(String str){
         String changedVar="";
