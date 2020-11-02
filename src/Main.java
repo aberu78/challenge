@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Locale;
@@ -29,12 +30,66 @@ public class Main {
         System.out.println("Enter number (Simple Adding challenge)");
         int num  = scanner.nextInt();
         String bL = scanner.nextLine();
-        System.out.println("Simple Adding  :" + simpleAdding(num)); */
+        System.out.println("Simple Adding  :" + simpleAdding(num));
 
         System.out.println("Enter String (Letter capitalization challenge)");
         String str = scanner.nextLine();
         System.out.println("Letter capitalization :" + letterCapitalize(str));
 
+        System.out.println("Enter String (Simple Symbols challenge)");
+        String str = scanner.nextLine();
+        System.out.println("Simple Symbols :" + simpleSymbols(str));
+
+        System.out.println("Enter num1 (Check Nums challenge)");
+        int num1 =  scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter num2");
+        int num2 =  scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Simple Symbols :" + checkNum(num1, num2));
+
+        System.out.println("Enter number (Time Convert challenge)");
+        int num  = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println(num + " mins are " + timeConvert(num)); */
+
+        System.out.println("Enter String (Alphabet Soup challenge)");
+        String str = scanner.nextLine();
+        System.out.println("Alphabet Soup  :" + alphabetSoup(str));
+
+
+    }
+
+    public static String alphabetSoup(String str){
+        char aWord[]  = str.toCharArray();
+        Arrays.sort(aWord);
+        return String.valueOf(aWord);
+    }
+
+    public static String timeConvert(int num){
+        int hour = num / 60;
+        int min = num % 60;
+        return hour + ":" + min;
+
+    }
+
+    public static boolean checkNum(int num1, int num2){
+        return num1 < num2;
+    }
+
+
+    public static boolean simpleSymbols(String str){
+        char[] aWord = str.toCharArray();
+        if(Character.isLetter(aWord[0]) || Character.isLetter(aWord[aWord.length-1]))
+            return false;
+        for (int i = 0; i < aWord.length-1; i++) {
+            if(Character.isLetter(aWord[i])){
+                if(aWord[i-1] != '+' || aWord[i+1] != '+'){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public static String letterCapitalize(String str){
