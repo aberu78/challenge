@@ -1,8 +1,5 @@
 import javax.swing.*;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.lang.Character.isDigit;
 
@@ -51,13 +48,49 @@ public class Main {
         System.out.println("Enter number (Time Convert challenge)");
         int num  = scanner.nextInt();
         scanner.nextLine();
-        System.out.println(num + " mins are " + timeConvert(num)); */
+        System.out.println(num + " mins are " + timeConvert(num));
 
         System.out.println("Enter String (Alphabet Soup challenge)");
         String str = scanner.nextLine();
-        System.out.println("Alphabet Soup  :" + alphabetSoup(str));
+        System.out.println("Alphabet Soup  :" + alphabetSoup(str)); */
 
 
+        System.out.println("Enter number (Kaprekars Constant challenge)");
+        int num  = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println(num + " count is  " + kapreKarsConstant(num));
+
+    }
+
+    public static int kapreKarsConstant(int num){
+        int count =0;
+        boolean isValid = false;
+        while(!isValid){
+
+            char temp[] = String.valueOf(num).toCharArray();
+            Arrays.sort(temp);
+            int num1 = Integer.parseInt(String.valueOf(temp));
+
+            StringBuilder input1 = new StringBuilder();
+            // append a string into StringBuilder input1
+            input1.append(String.valueOf(temp));
+            // reverse StringBuilder input1
+            input1 = input1.reverse();
+
+            int num2 = Integer.parseInt(String.valueOf(input1));
+            System.out.println(num2 + " - " + num1+ " = " + (num2-num1));
+
+            if(num2 - num1 == 6174){
+                isValid = true;
+            }
+            else{
+                num = num2-num1;
+                if(num < 1000)
+                    num = num*10;
+            }
+            count++;
+     }
+        return count;
     }
 
     public static String alphabetSoup(String str){
