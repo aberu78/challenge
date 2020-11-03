@@ -64,6 +64,7 @@ public class Main {
 
     public static int kapreKarsConstant(int num){
         int count =0;
+
         boolean isValid = false;
         while(!isValid){
 
