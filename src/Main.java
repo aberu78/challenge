@@ -1,7 +1,5 @@
-import javax.swing.*;
-import java.util.*;
-
-import static java.lang.Character.isDigit;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
@@ -9,11 +7,23 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         System.out.println("Enter String (Longest Word challenge)");
         String str = scanner.nextLine();
         System.out.println("Longest word :" + LongestWord(str));
+
+
+        System.out.println("Enter String (Maximal Square challenge)");
+        str = scanner.nextLine();
+        str = str.replaceAll("[\s\"]", "");
+        System.out.println(str);
+        String[] strArr = str.split(",");
+        int matrix[][] = matrix(strArr);
+        //System.out.println("Maximal Square  :" + maximalSquare(matrix));
+
+
         System.out.println("Enter number (First Factorial challenge)");
-        int num  = scanner.nextInt();
+        int num = scanner.nextInt();
         String bL = scanner.nextLine();
         System.out.println("First Factorial :" + firstFactorial(num));
         System.out.println("Enter String (First Reverse challenge)");
@@ -25,7 +35,7 @@ public class Main {
         System.out.println("Letter before " + str + " letter changed word :" + letterChanges(str));
 
         System.out.println("Enter number (Simple Adding challenge)");
-        num  = scanner.nextInt();
+        num = scanner.nextInt();
         bL = scanner.nextLine();
         System.out.println("Simple Adding  :" + simpleAdding(num));
 
@@ -38,15 +48,15 @@ public class Main {
         System.out.println("Simple Symbols :" + simpleSymbols(str));
 
         System.out.println("Enter num1 (Check Nums challenge)");
-        int num1 =  scanner.nextInt();
+        int num1 = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Enter num2");
-        int num2 =  scanner.nextInt();
+        int num2 = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Simple Symbols :" + checkNum(num1, num2));
 
         System.out.println("Enter number (Time Convert challenge)");
-        num  = scanner.nextInt();
+        num = scanner.nextInt();
         scanner.nextLine();
         System.out.println(num + " mins are " + timeConvert(num));
 
@@ -56,7 +66,7 @@ public class Main {
 
 
         System.out.println("Enter number (Kaprekars Constant challenge)");
-        num  = scanner.nextInt();
+        num = scanner.nextInt();
         scanner.nextLine();
         System.out.println(num + " count is  " + kapreKarsConstant(num));
 
@@ -64,14 +74,27 @@ public class Main {
         str = scanner.nextLine();
         System.out.println("Chessboard Traveling  :" + chessBoardTraveling(str));
 
-       /* System.out.println("Enter String (Maximal Square challenge)");
-        String str = scanner.nextLine();
-        System.out.println("Maximal Square  :" + maximalSquare(str));*/
+
+        scanner.close();
+
     }
 
-  /*  public static int maximalSquare(String[] strArray){
+    private static int[][]  matrix (String[] str){
 
-    }*/
+        int[][] newArr = new int[str.length][str[0].length()];
+        for(int i = 0; i < str.length; i++){
+            for(int j= 0; j < newArr[0].length;j++){
+                newArr[i][j] = Integer.parseInt(str[i].substring(j,j+1));
+                System.out.println(i + " " + j + " " + newArr[i][j]);
+            }
+        }
+        return newArr;
+    }
+
+    public static int maximalSquare(int[][] strArray){
+        int count = 0;
+        return count;
+    }
 
     public static int chessBoardTraveling(String str) {
         int x1 = Integer.parseInt(str.substring(1, 1 + 1));
@@ -155,15 +178,13 @@ public class Main {
     }
 
     public static String letterCapitalize(String str) {
-        String word = "";
+        StringBuilder word = new StringBuilder();
         String[] var = str.split(" ");
-        for (int i = 0; i < var.length; i++) {
-            String str1 = var[i].substring(0, 1).toUpperCase() + var[i].substring(1);
-            word += str1 + " ";
+        for (String s : var) {
+            String str1 = s.substring(0, 1).toUpperCase() + s.substring(1);
+            word.append(str1).append(" ");
         }
-
-
-        return word;
+        return word.toString();
     }
 
     public static int simpleAdding(int num) {
@@ -209,21 +230,10 @@ public class Main {
         //String reverse = "";
         StringBuilder reverse = new StringBuilder();
 
-        for(int i = str.length() - 1; i >= 0; i--)
-        {
+        for (int i = str.length() - 1; i >= 0; i--) {
             reverse.append(str.substring(i, i + 1));
         }
-
         return reverse.toString();
-
-        /*for (int i = var.length - 1; i >= 0; i--) {
-            String rev = var[i];
-            for (int j = rev.length() - 1; j >= 0; j--) {
-                reverse += rev.charAt(j);
-            }
-            reverse += " ";
-        }
-        return reverse;*/
     }
 
     public static int firstFactorial(int num) {
