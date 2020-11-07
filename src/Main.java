@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * This Main class is for New Hire Coding Challenge
+ * This Main class is for new hire training Coding Challenge
  */
 public class Main {
     public static Scanner scanner = new Scanner(System.in); // standard input
@@ -14,7 +14,6 @@ public class Main {
         int num = 0;
         String str = "";
         String bl = "";
-
 
         while(!quit) {
 
@@ -75,7 +74,7 @@ public class Main {
                     System.out.println("Enter num2");
                     int num2 = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.println("Simple Symbols :" + checkNum(num1, num2) + "\n");
+                    System.out.println("check nums :" + checkNum(num1, num2) + "\n");
                     break;
 
                 case 9:
@@ -107,10 +106,8 @@ public class Main {
                 case 13:
                     System.out.println("Enter String (Maximal Square challenge)");
                     str = scanner.nextLine();
-                    str = str.replaceAll("[\s\"]", "");
-                    System.out.println(str);
-                    String[] strArr = str.split(",");
-                    int matrix[][] = matrix(strArr);
+
+                    int matrix[][] = matrix(str);
                     System.out.println("Maximal Square  :" + maximalSquare(matrix) + "\n");
                     break;
                 case 0:
@@ -124,30 +121,42 @@ public class Main {
         scanner.close();
     }
 
-    private static int[][]  matrix (String[] str){
+    /***
+     * This fuction will take a string parameter and return 2d array of binary matrix.
+     * @param str The string that will change
+     * @return newArr The 2d array of the str
+     */
+    private static int[][]  matrix (String str){
 
-        int[][] newArr = new int[str.length][str[0].length()];
-        for(int i = 0; i < str.length; i++){
+        str = str.replaceAll("[\s\"]", "");
+        System.out.println(str);
+        String[] strArr = str.split(",");
+
+        int[][] newArr = new int[strArr.length][strArr[0].length()];
+
+        for(int i = 0; i < strArr.length; i++){
             for(int j= 0; j < newArr[0].length;j++){
-                newArr[i][j] = Integer.parseInt(str[i].substring(j,j+1));
-                //System.out.println("["+ i +"]"+ " " + "["+j + "]"+" " + newArr[i][j]);
+                newArr[i][j] = Integer.parseInt(strArr[i].substring(j,j+1));
             }
         }
         return newArr;
     }
 
+    /***
+     * This function will take 2d matrix array and return area of largest square sub-matrix that contains all 1's.
+     * @param strArray The 2d array of matrix
+     * @return
+     */
     public static int maximalSquare(int[][] strArray){
         int count = 0;
-        int xLength = strArray.length; //R
-        int yLength = strArray[0].length; //C
+        int xLength = strArray.length; //row
+        int yLength = strArray[0].length; //column
         int[][] newArr = new int[xLength][yLength];
 
         for(int i =0;i < xLength; i++ ) {
             newArr[i][0] = strArray[i][0];
         }
-        for(int j = 0; j <yLength; j++){
-            newArr[0][j] = strArray[0][j];
-        }
+        System.arraycopy(strArray[0], 0, newArr[0], 0, yLength);
 
         for(int i = 1; i < xLength; i++){
             for(int j = 1; j < yLength; j++){
@@ -187,13 +196,20 @@ public class Main {
         return count*count;
     }
 
-
+    /***
+     * This function will take a string consisting of the location of space on a standard 8X8 chess board with
+     * no pieces on the board along with another space on the chess board. The structure of a string
+     * is "(x,y)(a,b)" where a > x and b > y. This program will return how many ways there are of traveling from (x,y)
+     * on the board to (a,b) moving only up and to the right.
+     * @param str The string location of spaces in the 8X8 chessboard
+     * @return res The integer that counts how many ways to get to from (x,y) to (a,b)
+     */
     public static int chessBoardTraveling(String str) {
 
-        int x1 = Integer.parseInt(str.substring(1, 1 + 1));
-        int x2 = Integer.parseInt(str.substring(5, 5 + 1));
-        int y1 = Integer.parseInt(str.substring(2, 2 + 1));
-        int y2 = Integer.parseInt(str.substring(6, 6 + 1));
+        int x1 = Character.digit(str.charAt(1),10);
+        int x2 = Character.digit(str.charAt(5),10);
+        int y1 = Character.digit(str.charAt(2),10);
+        int y2 = Character.digit(str.charAt(6),10);
 
         int m = Math.abs(x2 - x1);
         int n = Math.abs(y2 - y1);
@@ -207,6 +223,15 @@ public class Main {
         return res;
     }
 
+    /***
+     * This function will take a number which consists of 4-digits with at least 2 distinct digits and
+     * performs following algorithm.
+     * 1. Arrange 4-digits numbers in descending and in ascending order(adding zeros to fit to a 4-digits number)
+     * 2. Subtract ascending order from descending order until the answer of this subtraction is 6174.
+     * 3. return how many times it takes to get the above operation.
+     * @param num The number that will be used
+     * @return count The integer that will return how many times two operations takes to get 6174
+     */
     public static int kapreKarsConstant(int num) {
         int count = 0;
 
@@ -218,17 +243,16 @@ public class Main {
             int num1 = Integer.parseInt(String.valueOf(temp));
 
             StringBuilder input1 = new StringBuilder();
-
             input1.append(String.valueOf(temp));
             input1 = input1.reverse();
 
             int num2 = Integer.parseInt(String.valueOf(input1));
             System.out.println(num2 + " - " + num1 + " = " + (num2 - num1));
 
-            if (num2 - num1 == 6174) {
+            num = num2 - num1;
+            if (num == 6174) {
                 isValid = true;
             } else {
-                num = num2 - num1;
                 if (num < 1000) {
                     num = num * 10;
                 }
@@ -260,8 +284,25 @@ public class Main {
         return hour + ":" + min;
     }
 
-    public static boolean checkNum(int num1, int num2) {
-        return num1 < num2;
+    /***
+     * This function will take 2 numbers and return "-1" for both number equal, "true" for
+     * the second number is greater than the first number entered,and otherwise "false"
+     * @param num1 The first number entered by a user
+     * @param num2 The second number entered by a user
+     * @return str The string will return "-1" if num1=num2, "true" if num1<num2, and "false" if num1 > num2
+     * */
+    public static String checkNum(int num1, int num2) {
+        String str="";
+        if(num1 ==  num2){
+            str= "-1";
+        }
+        else if(num1 < num2){
+            str = "true";
+        }
+        else{
+            str = "false";
+        }
+        return str;
     }
 
     /***
