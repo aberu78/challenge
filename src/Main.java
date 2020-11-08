@@ -129,7 +129,6 @@ public class Main {
     private static int[][]  matrix (String str){
 
         str = str.replaceAll("[\s\"]", "");
-        System.out.println(str);
         String[] strArr = str.split(",");
 
         int[][] newArr = new int[strArr.length][strArr[0].length()];
@@ -145,10 +144,9 @@ public class Main {
     /***
      * This function will take 2d matrix array and return area of largest square sub-matrix that contains all 1's.
      * @param strArray The 2d array of matrix
-     * @return
+     * @return maxNewArr*MaxNewArr The area of largest square of sub-matrix
      */
     public static int maximalSquare(int[][] strArray){
-        int count = 0;
         int xLength = strArray.length; //row
         int yLength = strArray[0].length; //column
         int[][] newArr = new int[xLength][yLength];
@@ -157,43 +155,22 @@ public class Main {
             newArr[i][0] = strArray[i][0];
         }
         System.arraycopy(strArray[0], 0, newArr[0], 0, yLength);
-
-        for(int i = 1; i < xLength; i++){
-            for(int j = 1; j < yLength; j++){
-                if(strArray[i][j] == 1){
-                    newArr[i][j] = Math.min(newArr[i][j-1], Math.min(newArr[i-1][j], newArr[i-1][j-1])) + 1;
-                }
-                else
-                    newArr[i][j] = 0;
-            }
-        }
-
         int maxNewArr = newArr[0][0];
-        int maxX= 0;
-        int maxY=0;
+        for(int i = 1; i < xLength; i++){
+            for(int j = 1; j < yLength; j++) {
+                if (strArray[i][j] == 1) {
+                    newArr[i][j] = Math.min(newArr[i][j - 1], Math.min(newArr[i - 1][j], newArr[i - 1][j - 1])) + 1;
 
-        for(int i = 0; i < xLength; i++){
-            for(int j= 0; j < yLength; j++){
-                if(maxNewArr < newArr[i][j]){
-                    maxNewArr = newArr[i][j];
-                    maxX= i;
-                    maxY = j;
-                    count ++;
-
-                  //  System.out.println(i);
-                   // System.out.println(j);
-
+                    if (maxNewArr < newArr[i][j]) {
+                        maxNewArr = newArr[i][j];
+                    }
+                }
+                else {
+                    newArr[i][j] = 0;
                 }
             }
         }
-        for(int i = 0; i < newArr.length; i ++){
-            for(int j = 0; j < newArr[0].length; j ++)
-                System.out.println("["+ i +"]"+ " " + "["+j + "]"+" " + newArr[i][j]);
-
-        }
-
-
-        return count*count;
+        return maxNewArr*maxNewArr;
     }
 
     /***
