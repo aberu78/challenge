@@ -227,10 +227,10 @@ public class Main {
             System.out.println(num2 + " - " + num1 + " = " + (num2 - num1));
 
             num = num2 - num1;
-            if (num == 6174) {
+            if (num == 6174) {  // 6174 required by algorithm number#2
                 isValid = true;
             } else {
-                if (num < 1000) {
+                if (num < 1000) { // if number is less than 4 digits
                     num = num * 10;
                 }
             }
