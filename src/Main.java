@@ -110,6 +110,12 @@ public class Main {
                     int[][] matrix = matrix(str);
                     System.out.println("Maximal Square  :" + maximalSquare(matrix) + "\n");
                     break;
+                case 14:
+                    System.out.println("Enter number (Pentagonal Number challenge)");
+                    num = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Number of dots: " + pentagonalNumbers(num) + "\n");
+                    break;
                 case 0:
                     quit = true;
                     break;
@@ -121,6 +127,16 @@ public class Main {
         scanner.close();
     }
 
+    /***
+     * This functio will read a positive integer and determined how many dots exist in a pentagonal shape
+     * around a center dot on the Nth iteration.
+     * @param n The integer that is nth iteration
+     * @return integer that is Centered pentagonal number : Cpn = (5n^2-5n+2)/2
+     */
+    public static int pentagonalNumbers(int n){
+
+        return (int)((5*Math.pow(n,2)) - 5*n +2) / 2;
+    }
     /***
      * This function will take a string parameter and return 2d array of binary matrix.
      * @param str The string that will change
@@ -430,7 +446,8 @@ public class Main {
         System.out.println("10: AlphabetSoup");
         System.out.println("11: Kaprekars Constant");
         System.out.println("12: Chess Board");
-        System.out.println("13 Maximal Square");
+        System.out.println("13: Maximal Square");
+        System.out.println("14: Pentagonal Number");
         System.out.println("0 : quit");
     }
 }
