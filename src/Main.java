@@ -107,8 +107,14 @@ public class Main {
                     System.out.println("Enter String (Maximal Square challenge)");
                     str = scanner.nextLine();
 
-                    int matrix[][] = matrix(str);
+                    int[][] matrix = matrix(str);
                     System.out.println("Maximal Square  :" + maximalSquare(matrix) + "\n");
+                    break;
+                case 14:
+                    System.out.println("Enter number (Pentagonal Number challenge)");
+                    num = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Number of dots: " + pentagonalNumbers(num) + "\n");
                     break;
                 case 0:
                     quit = true;
@@ -122,11 +128,21 @@ public class Main {
     }
 
     /***
-     * This fuction will take a string parameter and return 2d array of binary matrix.
+     * This functio will read a positive integer and determined how many dots exist in a pentagonal shape
+     * around a center dot on the Nth iteration.
+     * @param n The integer that is nth iteration
+     * @return integer that is Centered pentagonal number : Cpn = (5n^2-5n+2)/2
+     */
+    public static int pentagonalNumbers(int n){
+
+        return (int)((5*Math.pow(n,2)) - 5*n +2) / 2;
+    }
+    /***
+     * This function will take a string parameter and return 2d array of binary matrix.
      * @param str The string that will change
      * @return newArr The 2d array of the str
      */
-    private static int[][]  matrix (String str){
+    private static int[][] matrix (String str){
 
         str = str.replaceAll("[\s\"]", "");
         String[] strArr = str.split(",");
@@ -215,7 +231,7 @@ public class Main {
         boolean isValid = false;
         while (!isValid) {
 
-            char temp[] = String.valueOf(num).toCharArray();
+            char[] temp = String.valueOf(num).toCharArray();
             Arrays.sort(temp);
             int num1 = Integer.parseInt(String.valueOf(temp));
 
@@ -245,7 +261,7 @@ public class Main {
      * @return aWord The alphabetical order of the str
      */
     public static String alphabetSoup(String str) {
-        char aWord[] = str.toCharArray();
+        char[] aWord = str.toCharArray();
         Arrays.sort(aWord);
         return String.valueOf(aWord);
     }
@@ -269,7 +285,7 @@ public class Main {
      * @return str The string will return "-1" if num1=num2, "true" if num1<num2, and "false" if num1 > num2
      * */
     public static String checkNum(int num1, int num2) {
-        String str="";
+        String str = "";
         if(num1 ==  num2){
             str= "-1";
         }
@@ -333,8 +349,7 @@ public class Main {
         if (num == 1) {
             return 1;
         } else {
-            int sum = num + simpleAdding(num - 1);
-            return sum;
+            return num + simpleAdding(num - 1);
         }
     }
 
@@ -342,15 +357,15 @@ public class Main {
      * This function will take a string and modify it using following algorithm below and return the new string
      * 1: replace every letter in the string to next alphabet.(a->b, b->c, z->a)
      * 2: capitalize every vowel in the new string(a,e,i,o,u)
-     * @param str
+     * @param str The String to modify
      * @return changeVar The replaced to next letters with all vowel capitalized.
      */
     public static String letterChanges(String str) {
         String changedVar = "";
-        char aWord[] = str.toCharArray();
+        char[] aWord = str.toCharArray();
         for (int i = 0; i < aWord.length; i++) {
             if (Character.isLetter(aWord[i])) {
-                int ascii = (int) aWord[i];
+                int ascii = aWord[i];
 
                 if (ascii != (int) 'z' && ascii != 'Z') {
                     ascii += 1;
@@ -360,7 +375,7 @@ public class Main {
                     }
                     aWord[i] = testChar;
                 } else {
-                    aWord[i] = (char) 'A';
+                    aWord[i] = 'A';
                 }
             }
         }
@@ -370,11 +385,10 @@ public class Main {
 
     /***
      * This function will take a string and return the string in reversed order.
-     * @param str
+     * @param str The string to change
      * @return reverse The reverse order of str
      */
     public static String firstReverse(String str) {
-        String[] var = str.split(" ");
         StringBuilder reverse = new StringBuilder();
 
         for (int i = str.length() - 1; i >= 0; i--) {
@@ -403,7 +417,7 @@ public class Main {
      * @return longest The first largest word in the str
      */
     public static String longestWord(String str) {
-        String var[] = str.split(" ");
+        String[] var = str.split(" ");
         String longest = "";
 
         for (String s : var) {
@@ -432,7 +446,8 @@ public class Main {
         System.out.println("10: AlphabetSoup");
         System.out.println("11: Kaprekars Constant");
         System.out.println("12: Chess Board");
-        System.out.println("13 Maximal Square");
+        System.out.println("13: Maximal Square");
+        System.out.println("14: Pentagonal Number");
         System.out.println("0 : quit");
     }
 }
